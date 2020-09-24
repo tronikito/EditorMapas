@@ -1,0 +1,28 @@
+<div [ngStyle]="{
+    'position': 'absolute',
+    'background': background,
+    'left': 0 + 'px',
+    'top': (((blocksHeightTools) * margin)+margin*2+100 + ((blocksHeightTools) * bheight)) + 'px'
+
+}"><!--    'width': (((blocksWidth) * margin)+margin*2+100 + ((blocksWidth) * bwidth)) + 'px',
+    'height': (((blocksHeight) * margin)+margin*2+100 + ((blocksHeight) * bheight)) + 'px'-->
+    <div *ngFor="let columna of matrixX; let r = index;">
+        <div *ngFor="let casilla of columna; let r = index;" 
+        [ngClass]="{nosolid: casilla.solid == 0, solid: casilla.solid == 1}"
+        [ngStyle]="{
+            'position': 'absolute',
+            'background-size': 'cover',
+            'left': casilla.left + 'px',
+            'top': casilla.top + 'px',
+            'width': casilla.width + 'px',
+            'height': casilla.height + 'px',
+            'font-size': '23px',
+            'color': 'blue',
+            'display': 'flex',
+            'justify-content': 'center',
+            'align-items': 'center'
+            }" (click)="change(casilla)"
+            [style.background-image]="'url(' + getBackGround(casilla) + ')'"
+            >{{casilla.position}}</div>
+    </div>
+</div>

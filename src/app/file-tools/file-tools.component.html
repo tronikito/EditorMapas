@@ -1,0 +1,47 @@
+<div class="edittools">
+    <div [ngStyle]="{
+        'position': 'absolute',
+        'background': background,
+        'width': fileToolsWidth,
+        'top': '0px',
+        'left': (((blocksWidth) * margin)+margin*2+100 + ((blocksWidth) * bwidth)) + 'px',
+        'height': (((blocksHeightTools) * margin)+margin*2+100 + ((blocksHeightTools) * bheight)) + 'px'
+    }">
+    <div *ngFor="let tool of fileTools; let r = index;" 
+    [ngStyle]="{
+        'position': 'absolute',
+        'background-color': 'gray',
+        'background-repeat': 'no-repeat',
+        'background-position': 'center',
+        'background-size': 'contain',
+        'width': tool.width + 'px',
+        'top': tool.top + 'px',
+        'left': tool.left + 'px',
+        'height': tool.height + 'px'
+    }" (click)="change(tool)" [style.background-image]="'url(' + getBackGround(tool) + ')'">
+    </div>
+    <div [ngStyle]="{
+        'position': 'absolute',
+        'background-color': 'none',
+        'width': '315px',
+        'top': '35px',
+        'left': '265px',
+        'height': '50px'
+    }">
+    <button (click)="load()">Load</button>
+    </div>
+    <div [ngStyle]="{
+        'position': 'absolute',
+        'background-color': 'none',
+        'width': '315px',
+        'top': '95px',
+        'left': '265px',
+        'height': '50px'
+    }">
+    <button (click)="save()">Save</button>
+    </div>
+</div>
+
+
+
+            

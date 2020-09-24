@@ -1,0 +1,22 @@
+<div class="tools">
+    <div [ngStyle]="{
+        'position': 'absolute',
+        'background': background,
+        'left': 0 + 'px',
+        'top': 0 + 'px',
+        'width': (((blocksWidth) * margin)+margin*2+100 + ((blocksWidth) * bwidth)) + 'px',
+        'height': (((blocksHeight) * margin)+margin*2+100 + ((blocksHeight) * bheight)) + 'px'
+    }">
+    <div *ngFor="let columna of tools; let r = index;">
+        <div *ngFor="let casilla of columna; let r = index;" [ngStyle]="{
+            'position': 'absolute',
+            'background-size': 'cover',
+            'left': casilla.left + 'px',
+            'top': casilla.top + 'px',
+            'width': casilla.width + 'px',
+            'height': casilla.height + 'px'
+            }" (click)="change(casilla)" 
+            [style.background-image]="'url(' + getBackGround(casilla) + ')'"></div>
+    </div>
+</div>
+
