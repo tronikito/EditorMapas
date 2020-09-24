@@ -1,27 +1,19 @@
-# EditorMapas
+# Angular-8 y nodeJS
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+Repositorio Del Editor de Mapas para la aplicación de android
 
-## Development server
+Por Kevin Fernandez Muñoz
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Es necesario tener instalado angular8;
 
-## Code scaffolding
+Para utilizar, descargar en directorio y entrar en el a través de la consola de comandos CMD.
+Una vez en el directorio del proyecto, utilizar 'ng serve' para el front.
+Acceder desde el navegador por http://localhost:4200/ a través del navegador Chrome.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Es necesario tener instalado nodeJS;
 
-## Build
+Con otra consola de comandos CMD entrar en el directorio principal del proyecto y la subcarpeta nodeJS 
+y arrancar el servidor de nodeJS con el comando 'npm start server.js' para el back.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Las funciones del back aún no están implementadas. Así que no es necesario arrancarlo.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

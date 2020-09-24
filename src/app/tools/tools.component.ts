@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorMapasService } from '../editor/editor-mapas.service';
 import { BlockTool } from './block-tool.model';
-import * as fs from "fs";
 
 @Component({
   selector: 'app-tools',
