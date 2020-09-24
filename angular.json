@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "EditorMapas"
+    }
+  },
+  "defaultProject": "EditorMapas",
+  "cli": {
+    "analytics": "2c7e5227-3a85-447e-8cdd-aa9f556f6f4c"
+  }
 }
