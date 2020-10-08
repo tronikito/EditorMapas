@@ -1,5 +1,4 @@
-import { Component,OnInit } from '@angular/core';
-import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +8,9 @@ import { HttpBackend, HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   title = 'EditorMapas';
 
-constructor(private http: HttpClient) {
+  constructor() {
+  }
 
- }
-ngOnInit(): void {
-  
-
-
-}
+  ngOnInit() {
+  }
 }

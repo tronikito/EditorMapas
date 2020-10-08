@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { EditorMapasService } from './editor-mapas.service';
 import { Block } from './block.model';
 
@@ -16,20 +16,18 @@ export class EditorComponent implements OnInit {
   bwidth: number;
   bheight: number;
   margin: number;
-  serviceEdit: EditorMapasService;
 
   matrixX: Array<Array<Block>>;
   column: Array<Block>;
 
-  constructor(public EditorMapasService: EditorMapasService) { 
+  constructor(public serviceEdit: EditorMapasService) {
 
-    this.serviceEdit = EditorMapasService;
     this.blocksWidth = this.serviceEdit.blocksWidth;
     this.blocksHeight = this.serviceEdit.blocksHeight;
     this.blocksHeightTools = this.serviceEdit.blocksHeightTools;
     this.bwidth = this.serviceEdit.bwidth;
     this.bheight = this.serviceEdit.bheight;
-    this.margin = this.serviceEdit.margin;    
+    this.margin = this.serviceEdit.margin;
 
     this.matrixX = new Array<Array<Block>>();
     for (var x = 0; x < this.blocksWidth; x++) {
@@ -37,12 +35,12 @@ export class EditorComponent implements OnInit {
       for (var y = 0; y < this.blocksHeight; y++) {
         var b = new Block;
         if (x != 0) {
-          b.left = this.matrixX[x-1][0].left + this.bwidth + this.margin;
+          b.left = this.matrixX[x - 1][0].left + this.bwidth + this.margin;
         } else {
           b.left = this.margin + 50;
         }
         if (y != 0) {
-          b.top = this.column[y-1].top + this.bheight + this.margin;
+          b.top = this.column[y - 1].top + this.bheight + this.margin;
         } else {
           b.top = this.margin + 50;
         }
@@ -80,27 +78,19 @@ export class EditorComponent implements OnInit {
 
   getBackGround(b) {
     if (this.matrixX[b.x][b.y].type.localeCompare("enemy") == 0) {
-      if (this.matrixX[b.x][b.y].enemyType.localeCompare("spider") == 0) {
-        return "../../assets/spider.png";
-      }
-      if (this.matrixX[b.x][b.y].enemyType.localeCompare("plant") == 0) {
-        return "../../assets/plant.png";
-      }
-    } 
-    if (this.matrixX[b.x][b.y].type.localeCompare("weapon") == 0) {
-      if (this.matrixX[b.x][b.y].weaponType.localeCompare("chicken") == 0) {
-        return "../../assets/chicken.png";
-      }
-      if (this.matrixX[b.x][b.y].weaponType.localeCompare("ferret") == 0) {
-        return "../../assets/ferret.png";
-      }
-      if (this.matrixX[b.x][b.y].weaponType.localeCompare("unicorn") == 0) {
-        return "../../assets/unicorn.png";
-      }
-    } 
-    if (this.matrixX[b.x][b.y].type.localeCompare("block") == 0) {
-      return "../../assets/" + this.matrixX[b.x][b.y].blockType + "_" + this.matrixX[b.x][b.y].sprite + ".png";
+      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].enemyType + ".png";
     }
-    
+
+    if (this.matrixX[b.x][b.y].type.localeCompare("weapon") == 0) {
+      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].weaponType + ".png";
+    }
+
+    if (this.matrixX[b.x][b.y].type.localeCompare("block") == 0) {
+      if (this.matrixX[b.x][b.y].blockType.localeCompare("empty") == 0) {
+        return "../../assets/empty.png";
+      } else {
+        return "../../assets/" + this.matrixX[b.x][b.y].blockType + "/" + this.matrixX[b.x][b.y].blockType + "_" + this.matrixX[b.x][b.y].sprite + ".png";
+      }
+    }
   }
 }

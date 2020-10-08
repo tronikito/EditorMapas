@@ -158,15 +158,13 @@ export class FileToolsComponent implements OnInit {
 
   getBackGround(b) {
     if (b.toolOption.localeCompare("addRow") == 0) {
-      return "../../assets/add.png";
+      return "../../assets/buttom/add.png";
     } else if (b.toolOption.localeCompare("addCol") == 0) {
-      return "../../assets/add.png";
+      return "../../assets/buttom/add.png";
     } else if (b.toolOption.localeCompare("delRow") == 0) {
-      return "../../assets/del.png";
+      return "../../assets/buttom/del.png";
     } else if (b.toolOption.localeCompare("delCol") == 0) {
-      return "../../assets/del.png";
-    } else {
-      return "../../assets/empty.png";
+      return "../../assets/buttom/del.png";
     }
   }
   /*loadPath(path) {

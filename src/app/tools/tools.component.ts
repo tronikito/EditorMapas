@@ -9,6 +9,7 @@ import { BlockTool } from './block-tool.model';
 })
 export class ToolsComponent implements OnInit {
 
+  images;
   background = "brown";
   blocksWidth: number;
   blocksHeight: number;
@@ -16,13 +17,12 @@ export class ToolsComponent implements OnInit {
   bwidth: number;
   bheight: number;
   margin: number;
-  serviceEdit: EditorMapasService;
   tools: Array<Array<BlockTool>>;
   column: Array<BlockTool>;
 
-  constructor(public EditorMapasService: EditorMapasService) { 
+  constructor(public serviceEdit: EditorMapasService) { 
 
-    this.serviceEdit = EditorMapasService;
+    this.images = this.serviceEdit.images;
     this.blocksWidth = this.serviceEdit.blocksWidth;
     this.blocksHeight = 2;
     this.blocksHeightTools = this.serviceEdit.blocksHeightTools
@@ -93,15 +93,17 @@ export class ToolsComponent implements OnInit {
   }
 
   change(b) {
-    if (b.tool == 2) {
+    if (b.tool == 0) {
       this.serviceEdit.position = 0;//b.type
-    } else if (b.tool == 3) {
+    } else if (b.tool == 1) {
       this.serviceEdit.position = 1;//b.type
-    } else if (b.tool == 4) {
+    } else if (b.tool == 2) {
       this.serviceEdit.solid = 0;//b.type
-    } else if (b.tool == 5) {
+    } else if (b.tool == 3) {
       this.serviceEdit.solid = 1;//b.type
-    } else if (b.tool == 6) {
+    } 
+    
+    /*else if (b.tool == 6) {
       this.options("enemy","spider",1);//spider
     } else if (b.tool == 7) {
       this.options("enemy","plant",1);//plant
@@ -157,7 +159,7 @@ export class ToolsComponent implements OnInit {
       this.options("block","stoneAngle",4);//void animated
     } else {
       this.options("block","empty",1);//void animated
-    }
+    }*/
   }
 
 
@@ -165,19 +167,19 @@ export class ToolsComponent implements OnInit {
 
   
     if (b.tool == 0) {
-      return "../../assets/back.png";
+      return "../../assets/buttom/back.png";
     } else if (b.tool == 1) {
-      return "../../assets/front.png";
+      return "../../assets/buttom/front.png";
     } else if (b.tool == 2) {
-      return "../../assets/nosolid.png";
+      return "../../assets/buttom/nosolid.png";
     } else if (b.tool == 3) {
-      return "../../assets/solid.png";
+      return "../../assets/buttom/solid.png";
     } //fixed
     
     
     else if (b.tool == 6) {
-      return "../../assets/spider.png";
-    } else if (b.tool == 7) {
+      return "../../assets/enemy/spider.png";
+    }/* else if (b.tool == 7) {
       return "../../assets/plant.png";
     } else if (b.tool == 8) {
       return "../../assets/chicken.png";
@@ -189,9 +191,9 @@ export class ToolsComponent implements OnInit {
       return "../../assets/grass_0.png";
     } else if (b.tool == 12) {
       return "../../assets/dirt_1.png";
-    } else if (b.tool == 13) {
-      return "../../assets/dirt_2.png";
-    } else if (b.tool == 14) {
+    } */else if (b.tool == 13) {
+      return "../../assets/dirt/dirt_2.png";
+    } /*else if (b.tool == 14) {
       return "../../assets/stone_1.png";
     } else if (b.tool == 15) {
       return "../../assets/stone_2.png";
@@ -231,7 +233,7 @@ export class ToolsComponent implements OnInit {
       return "../../assets/stoneAngle_4.png";
     } else {
       return "../../assets/empty_1.png";
-    }
+    }*/
     
   }
 }
