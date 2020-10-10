@@ -9,7 +9,9 @@ import { BlockTool } from './block-tool.model';
 })
 export class ToolsComponent implements OnInit {
 
-  images;
+  blocks;
+  weapons = null;
+
   background = "brown";
   blocksWidth: number;
   blocksHeight: number;
@@ -22,7 +24,6 @@ export class ToolsComponent implements OnInit {
 
   constructor(public serviceEdit: EditorMapasService) { 
 
-    this.images = this.serviceEdit.images;
     this.blocksWidth = this.serviceEdit.blocksWidth;
     this.blocksHeight = 2;
     this.blocksHeightTools = this.serviceEdit.blocksHeightTools
@@ -63,7 +64,6 @@ export class ToolsComponent implements OnInit {
   options(type,typeSelected,sprite) {
 
     if (type.localeCompare("enemy") == 0) {
-      console.log("enemy");
       this.serviceEdit.type = "enemy";
       this.serviceEdit.position = 0;//behind
       this.serviceEdit.solid = 0;
@@ -93,6 +93,11 @@ export class ToolsComponent implements OnInit {
   }
 
   change(b) {
+
+    this.blocks = this.serviceEdit.blocks;
+    this.weapons = this.serviceEdit.weapons;
+    console.log(this.blocks);
+
     if (b.tool == 0) {
       this.serviceEdit.position = 0;//b.type
     } else if (b.tool == 1) {
@@ -101,70 +106,32 @@ export class ToolsComponent implements OnInit {
       this.serviceEdit.solid = 0;//b.type
     } else if (b.tool == 3) {
       this.serviceEdit.solid = 1;//b.type
-    } 
-    
-    /*else if (b.tool == 6) {
-      this.options("enemy","spider",1);//spider
-    } else if (b.tool == 7) {
-      this.options("enemy","plant",1);//plant
-    } else if (b.tool == 8) {
-      this.options("weapon","chicken",1);//chicken
-    } else if (b.tool == 9) {
-      this.options("weapon","ferret",1);//ferret
-    } else if (b.tool == 10) {
-      this.options("weapon","unicorn",1);//unicorn
-    } else if (b.tool == 11) {
-      this.options("block","grass",0);//grass animated
-    } else if (b.tool == 12) {
-      this.options("block","dirt",1);//dirt1
-    } else if (b.tool == 13) {
-      this.options("block","dirt",2);//dirt2
-    } else if (b.tool == 14) {
-      this.options("block","stone",1);//stone1
-    } else if (b.tool == 15) {
-      this.options("block","stone",2);//stone2
-    } else if (b.tool == 16) {
-      this.options("block","void",0);//void animated
-    } else if (b.tool == 17) {
-      this.options("block","sapphire",1);//void animated
-    } else if (b.tool == 18) {
-      this.options("block","sapphire",2);//void animated
-    } else if (b.tool == 19) {
-      this.options("block","sapphire",3);//void animated
-    } else if (b.tool == 20) {
-      this.options("block","gold",1);//void animated
-    } else if (b.tool == 21) {
-      this.options("block","gold",2);//void animated
-    } else if (b.tool == 22) {
-      this.options("block","gold",3);//void animated
-    } else if (b.tool == 23) {
-      this.options("block","redstone",1);//void animated
-    } else if (b.tool == 24) {
-      this.options("block","redstone",2);//void animated
-    } else if (b.tool == 25) {
-      this.options("block","redstone",3);//void animated
-    } else if (b.tool == 26) {
-      this.options("block","dirtup",1);//void animated
-    } else if (b.tool == 27) {
-      this.options("block","stoneup",1);//void animated
-    } else if (b.tool == 28) {
-      this.options("block","stone",3);//void animated
-    } else if (b.tool == 29) {
-      this.options("block","stoneAngle",1);//void animated
-    } else if (b.tool == 30) {
-      this.options("block","stoneAngle",2);//void animated
-    } else if (b.tool == 31) {
-      this.options("block","stoneAngle",3);//void animated
-    } else if (b.tool == 32) {
-      this.options("block","stoneAngle",4);//void animated
+    } else if (this.blocks != null && this.weapons != null) {
+        if (b.tools > (4+this.weapons.length+this.blocks.length)) {
+          this.options("block","empty",1);
+        }
     } else {
-      this.options("block","empty",1);//void animated
-    }*/
+      if (b.tools > 3) this.options("block","empty",1);
+    }
+    if (this.weapons != null) {
+      if (b.tool >= 4 && b.tool <= this.weapons.length + 4) {
+        this.options("weapon",this.weapons[b.tool-4],1);
+      }
+    }
+    if (this.blocks != null && this.weapons != null) {
+      if (b.tool >= (4+this.weapons.length) && b.tool <= this.blocks.length + (4+this.weapons.length)) {
+        var block = this.blocks[b.tool-(4+this.weapons.length)].split(".",1);
+        block = block.toString().split("_",2);
+        this.options("block",block[0],block[1]);
+      }
+    }
+
+
+
   }
 
 
   getBackGround(b) {
-
   
     if (b.tool == 0) {
       return "../../assets/buttom/back.png";
@@ -174,66 +141,21 @@ export class ToolsComponent implements OnInit {
       return "../../assets/buttom/nosolid.png";
     } else if (b.tool == 3) {
       return "../../assets/buttom/solid.png";
-    } //fixed
-    
-    
-    else if (b.tool == 6) {
-      return "../../assets/enemy/spider.png";
-    }/* else if (b.tool == 7) {
-      return "../../assets/plant.png";
-    } else if (b.tool == 8) {
-      return "../../assets/chicken.png";
-    } else if (b.tool == 9) {
-      return "../../assets/ferret.png";
-    } else if (b.tool == 10) {
-      return "../../assets/unicorn.png";
-    } else if (b.tool == 11) {
-      return "../../assets/grass_0.png";
-    } else if (b.tool == 12) {
-      return "../../assets/dirt_1.png";
-    } */else if (b.tool == 13) {
-      return "../../assets/dirt/dirt_2.png";
-    } /*else if (b.tool == 14) {
-      return "../../assets/stone_1.png";
-    } else if (b.tool == 15) {
-      return "../../assets/stone_2.png";
-    } else if (b.tool == 16) {
-      return "../../assets/void_0.png";
-    } else if (b.tool == 17) {
-      return "../../assets/sapphire_1.png";
-    } else if (b.tool == 18) {
-      return "../../assets/sapphire_2.png";
-    } else if (b.tool == 19) {
-      return "../../assets/sapphire_3.png";
-    } else if (b.tool == 20) {
-      return "../../assets/gold_1.png";
-    } else if (b.tool == 21) {
-      return "../../assets/gold_2.png";
-    } else if (b.tool == 22) {
-      return "../../assets/gold_3.png";
-    } else if (b.tool == 23) {
-      return "../../assets/redstone_1.png";
-    } else if (b.tool == 24) {
-      return "../../assets/redstone_2.png";
-    } else if (b.tool == 25) {
-      return "../../assets/redstone_3.png";
-    } else if (b.tool == 26) {
-      return "../../assets/dirtup_1.png";
-    } else if (b.tool == 27) {
-      return "../../assets/stoneup_1.png";
-    } else if (b.tool == 28) {
-      return "../../assets/stone_3.png";
-    } else if (b.tool == 29) {
-      return "../../assets/stoneAngle_1.png";
-    } else if (b.tool == 30) {
-      return "../../assets/stoneAngle_2.png";
-    } else if (b.tool == 31) {
-      return "../../assets/stoneAngle_3.png";
-    } else if (b.tool == 32) {
-      return "../../assets/stoneAngle_4.png";
-    } else {
-      return "../../assets/empty_1.png";
-    }*/
-    
+    }
+    if (this.weapons != null) {
+      if (b.tool >= 4 && b.tool <= this.weapons.length + 3) {
+        return "../../assets/weapon/" + this.weapons[b.tool-4];
+      }
+      if (this.blocks != null) {
+        if (b.tool >= (4+this.weapons.length) && b.tool <= this.blocks.length-1 + (4+this.weapons.length)) {
+          
+          return "../../assets/" + this.blocks[b.tool-(4+this.weapons.length)].split("_",1) + "/" + this.blocks[b.tool-(4+this.weapons.length)];
+        }
+        if (b.tool > (4+this.weapons.length+this.blocks.length)) {
+          return "../../assets/empty.png";
+        }
+      }
+    }
+    if (b.tool > 3) return "../../assets/empty.png";
   }
 }

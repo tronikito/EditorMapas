@@ -17,9 +17,36 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-var images = [];
+var blocks = [];
+var weapons = [];
 
 function callFiles() {
+  callForBlocks();
+  callForWeapons();
+}
+
+function callForWeapons() {
+
+  //server assets filesystem    
+
+  const fs = require('fs');
+  const folder = '../src/assets/weapon';
+
+  fs.readdir(folder, (err, folder) => {
+    folder.forEach(weapon => {
+        if (!(weapon.charAt(0) == ".")) {
+            weapons.push(weapon);
+        }
+      });
+  });
+
+  setTimeout(() => {
+    weapons.forEach(file => {
+      console.log(file);
+    })}, 1000);
+}
+
+function callForBlocks() {
 
   //server assets filesystem    
 
@@ -38,7 +65,7 @@ function callFiles() {
         var filesDir = '../src/assets/' + dir + "/";
         fs.readdir(filesDir, (err, file) => {
           file.forEach(file => {
-            images.push(file);
+            blocks.push(file);
           });
         });
 
@@ -47,15 +74,19 @@ function callFiles() {
   });
 
   setTimeout(() => {
-    images.forEach(file => {
+    blocks.forEach(file => {
       console.log(file);
     })}, 1000);
 }
 
 // simple route
-app.get('/images', function (req, res) {
-  res.send(images);
-  console.log("call for images");
+app.get('/blocks', function (req, res) {
+  res.send(blocks);
+  console.log("call for blocks");
+});
+app.get('/weapons', function (req, res) {
+  res.send(weapons);
+  console.log("call for weapons");
 });
 
 // set port, listen for requests

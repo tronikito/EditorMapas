@@ -5,13 +5,15 @@ import { Tools } from '../file-tools/tools.model';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToolsComponent } from '../tools/tools.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorMapasService {
 
-  public images;
+  public blocks;
+  public weapons;
 
   public blocksWidth = 32-1; //because 0
   public blocksHeight = 18-1; // because 0
@@ -35,15 +37,22 @@ export class EditorMapasService {
   
   constructor(private http: HttpClient) {
 
-    this.callForImages();
+    this.callForBlocks();
+    this.callForWeapons();
     
    }
 
-  callForImages() {
-    this.http.get("http://localhost:8080/images")
+  callForBlocks() {
+    this.http.get("http://localhost:8080/blocks")
       .subscribe(data => {
-        this.images = data;
-        console.log(this.images);
+        this.blocks = data;
+      });
+  }
+
+  callForWeapons() {
+    this.http.get("http://localhost:8080/weapons")
+      .subscribe(data => {
+        this.weapons = data;
       });
   }
 }

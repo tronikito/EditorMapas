@@ -82,7 +82,7 @@ export class EditorComponent implements OnInit {
     }
 
     if (this.matrixX[b.x][b.y].type.localeCompare("weapon") == 0) {
-      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].weaponType + ".png";
+      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].weaponType;
     }
 
     if (this.matrixX[b.x][b.y].type.localeCompare("block") == 0) {
