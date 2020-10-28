@@ -9,8 +9,9 @@ import { BlockTool } from './block-tool.model';
 })
 export class ToolsComponent implements OnInit {
 
-  blocks;
+  blocks = null;
   weapons = null;
+  enemys = null;
 
   background = "brown";
   blocksWidth: number;
@@ -59,6 +60,14 @@ export class ToolsComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+    setTimeout(() => {
+      this.blocks = this.serviceEdit.blocks;
+      this.weapons = this.serviceEdit.weapons;
+      this.enemys = this.serviceEdit.enemys;
+      console.log("resources Loaded");
+      }, 2000);
+
   }
 
   options(type,typeSelected,sprite) {
@@ -94,10 +103,6 @@ export class ToolsComponent implements OnInit {
 
   change(b) {
 
-    this.blocks = this.serviceEdit.blocks;
-    this.weapons = this.serviceEdit.weapons;
-    console.log(this.blocks);
-
     if (b.tool == 0) {
       this.serviceEdit.position = 0;//b.type
     } else if (b.tool == 1) {
@@ -106,23 +111,31 @@ export class ToolsComponent implements OnInit {
       this.serviceEdit.solid = 0;//b.type
     } else if (b.tool == 3) {
       this.serviceEdit.solid = 1;//b.type
-    } else if (this.blocks != null && this.weapons != null) {
-        if (b.tools > (4+this.weapons.length+this.blocks.length)) {
-          this.options("block","empty",1);
-        }
-    } else {
-      if (b.tools > 3) this.options("block","empty",1);
-    }
+    } else if (b.tools > 3) this.options("block","empty",1);
+
     if (this.weapons != null) {
       if (b.tool >= 4 && b.tool <= this.weapons.length + 4) {
-        this.options("weapon",this.weapons[b.tool-4],1);
+        var weapon = this.weapons[b.tool-4].split(".",1);
+        this.options("weapon",weapon[0],1);
       }
     }
     if (this.blocks != null && this.weapons != null) {
-      if (b.tool >= (4+this.weapons.length) && b.tool <= this.blocks.length + (4+this.weapons.length)) {
+      if (b.tool >= (4+this.weapons.length) && b.tool <= this.blocks.length + (4+this.weapons.length-1)) {
         var block = this.blocks[b.tool-(4+this.weapons.length)].split(".",1);
         block = block.toString().split("_",2);
         this.options("block",block[0],block[1]);
+      }
+    }
+    if (this.enemys != null && this.blocks != null && this.weapons != null) {
+      if (b.tool >= (4+this.weapons.length+this.blocks.length) && b.tool <= this.enemys.length-1 + (4+this.weapons.length+this.blocks.length)) {
+        var enemy = this.enemys[b.tool-(4+this.weapons.length+this.blocks.length)].split(".",1);
+        console.log(this.enemys);
+        this.options("enemy",enemy[0].toString(),1);
+      }
+    }
+    if (this.enemys != null && this.blocks != null && this.weapons != null) {
+      if (b.tool >= (4+this.weapons.length+this.blocks.length + this.enemys.length)) {
+        this.options("block","empty",1);
       }
     }
 
@@ -146,13 +159,15 @@ export class ToolsComponent implements OnInit {
       if (b.tool >= 4 && b.tool <= this.weapons.length + 3) {
         return "../../assets/weapon/" + this.weapons[b.tool-4];
       }
-      if (this.blocks != null) {
+      if (this.blocks != null && this.weapons != null) {
         if (b.tool >= (4+this.weapons.length) && b.tool <= this.blocks.length-1 + (4+this.weapons.length)) {
           
           return "../../assets/" + this.blocks[b.tool-(4+this.weapons.length)].split("_",1) + "/" + this.blocks[b.tool-(4+this.weapons.length)];
         }
-        if (b.tool > (4+this.weapons.length+this.blocks.length)) {
-          return "../../assets/empty.png";
+        if (this.enemys != null && this.blocks != null && this.weapons != null) {
+          if (b.tool >= (4+this.weapons.length+this.blocks.length) && b.tool <= this.enemys.length-1 + (4+this.weapons.length+this.blocks.length)) {
+            return "../../assets/enemy/" + this.enemys[b.tool-(4+this.weapons.length+this.blocks.length)];
+          }
         }
       }
     }

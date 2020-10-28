@@ -19,10 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var blocks = [];
 var weapons = [];
+var enemys = [];
 
 function callFiles() {
   callForBlocks();
   callForWeapons();
+  callForEnemys();
 }
 
 function callForWeapons() {
@@ -42,6 +44,27 @@ function callForWeapons() {
 
   setTimeout(() => {
     weapons.forEach(file => {
+      console.log(file);
+    })}, 1000);
+}
+
+function callForEnemys() {
+
+  //server assets filesystem    
+
+  const fs = require('fs');
+  const folder = '../src/assets/enemy';
+
+  fs.readdir(folder, (err, folder) => {
+    folder.forEach(enemy => {
+        if (!(enemy.charAt(0) == ".")) {
+            enemys.push(enemy);
+        }
+      });
+  });
+
+  setTimeout(() => {
+    enemys.forEach(file => {
       console.log(file);
     })}, 1000);
 }
@@ -87,6 +110,10 @@ app.get('/blocks', function (req, res) {
 app.get('/weapons', function (req, res) {
   res.send(weapons);
   console.log("call for weapons");
+});
+app.get('/enemys', function (req, res) {
+  res.send(enemys);
+  console.log("call for enemys");
 });
 
 // set port, listen for requests

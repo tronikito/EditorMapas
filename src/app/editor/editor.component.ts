@@ -74,6 +74,7 @@ export class EditorComponent implements OnInit {
     b.position = this.serviceEdit.position;
     b.solid = this.serviceEdit.solid;
     b.sprite = this.serviceEdit.sprite;
+
   }
 
   getBackGround(b) {
@@ -82,7 +83,7 @@ export class EditorComponent implements OnInit {
     }
 
     if (this.matrixX[b.x][b.y].type.localeCompare("weapon") == 0) {
-      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].weaponType;
+      return "../../assets/" + this.matrixX[b.x][b.y].type + "/" + this.matrixX[b.x][b.y].weaponType + ".png";
     }
 
     if (this.matrixX[b.x][b.y].type.localeCompare("block") == 0) {

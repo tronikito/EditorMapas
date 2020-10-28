@@ -14,6 +14,7 @@ export class EditorMapasService {
 
   public blocks;
   public weapons;
+  public enemys;
 
   public blocksWidth = 32-1; //because 0
   public blocksHeight = 18-1; // because 0
@@ -39,6 +40,7 @@ export class EditorMapasService {
 
     this.callForBlocks();
     this.callForWeapons();
+    this.callForEnemys();
     
    }
 
@@ -53,6 +55,13 @@ export class EditorMapasService {
     this.http.get("http://localhost:8080/weapons")
       .subscribe(data => {
         this.weapons = data;
+      });
+  }
+
+  callForEnemys() {
+    this.http.get("http://localhost:8080/enemys")
+      .subscribe(data => {
+        this.enemys = data;
       });
   }
 }
