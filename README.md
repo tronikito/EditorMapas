@@ -5,8 +5,6 @@
 
 Por Kevin Fernandez Muñoz
 
-# Java 8 Android Studio 4.0;
-
 Es necesario tener instalado angular8;
 
 Para utilizar, descargar en directorio y entrar en el a través de la consola de comandos CMD.
@@ -22,7 +20,6 @@ y arrancar el servidor de nodeJS con el comando 'npm start server.js' para el ba
 1. Screenshoot:</br></br>
     <img src="https://github.com/tronikito/EditorMapas/raw/master/mockup.png" alt="Mockup" width="600"/>
 
+Genera un archivo Json con la matriz de un escenario.
 
-Repositorio Del Editor de Mapas para la aplicación de android
-
-Por Kevin Fernandez Muñoz
+Repositorio Del Editor de Mapas para la aplicación de android CorreCorre
