@@ -1,8 +1,11 @@
+(15/6/2020)
+
+# Repositorio EditorMapas
 # Angular-8 y nodeJS
 
-Repositorio Del Editor de Mapas para la aplicación de android
-
 Por Kevin Fernandez Muñoz
+
+# Java 8 Android Studio 4.0;
 
 Es necesario tener instalado angular8;
 
@@ -15,5 +18,11 @@ Es necesario tener instalado nodeJS;
 Con otra consola de comandos CMD entrar en el directorio principal del proyecto y la subcarpeta nodeJS 
 y arrancar el servidor de nodeJS con el comando 'npm start server.js' para el back.
 
-Las funciones del back aún no están implementadas. Así que no es necesario arrancarlo.
 
+1. Screenshoot:</br></br>
+    <img src="https://github.com/tronikito/EditorMapas/raw/master/mockup.png" alt="Mockup" width="600"/>
+
+
+Repositorio Del Editor de Mapas para la aplicación de android
+
+Por Kevin Fernandez Muñoz
